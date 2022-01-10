@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
     if(lists.empty()){
-        return nullptr;
+        return NULL;
     }
     while(lists.size() > 1){
         lists.push_back(mergeTwoLists(lists[0], lists[1]));
@@ -22,10 +22,10 @@ public:
     return lists.front();
 }
 ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-    if(l1 == nullptr){
+    if(l1 == NULL){
         return l2;
     }
-    if(l2 == nullptr){
+    if(l2 == NULL){
         return l1;
     }
     if(l1->val <= l2->val){
