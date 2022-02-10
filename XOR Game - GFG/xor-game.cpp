@@ -11,12 +11,11 @@ class Solution{
 public:
     int xorCal(int k){
         // code here
-        if (k == 1)
-        return 2;
-     
-    // if k is of form 2^i-1
-    if (((k + 1) & k) == 0)
-        return k / 2;
+       for(int i=1; i<=100; i++)
+       {
+           if((i^(i+1)) == k)
+           return i;
+       }
  
     return -1;
     }
