@@ -11,7 +11,7 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(!head)
+       if(!head)
             return 0;
         if(!head->next)
             return head;
@@ -29,6 +29,6 @@ public:
                 p = p->next;
             
             return deleteDuplicates(p);
-        }
+        } 
     }
 };
