@@ -17,7 +17,7 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        map<Node*,Node*> m;
+       map<Node*,Node*> m;
         Node* temp=head;
         while(temp)
         {
@@ -31,6 +31,6 @@ public:
             m[temp]->random = m[temp->random];
             temp = temp->next;
         }
-        return m[head];
+        return m[head]; 
     }
 };
