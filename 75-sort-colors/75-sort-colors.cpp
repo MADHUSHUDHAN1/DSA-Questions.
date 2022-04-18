@@ -1,23 +1,24 @@
 class Solution {
 public:
-    void swap(int *x,int *y)
-    {
-        int temp= *x;
-        *x = *y;
-        *y = temp;
-    }
     void sortColors(vector<int>& nums) {
+       int low = 0;
+        int high = nums.size()-1;
+        int mid = 0;
         
-        for(int i=0; i<nums.size()-1; i++)
+        while(mid<= high)
         {
-            int min_ind=i;
-            for(int j=i+1; j<nums.size(); j++)
+            switch(nums[mid])
             {
-                if(nums[j]<nums[min_ind])
-                    min_ind = j;
+                case 0:
+                    swap(nums[low++],nums[mid++]);
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    swap(nums[mid],nums[high--]);
+                    break;
             }
-            
-            swap(&nums[i],&nums[min_ind]);
         }
     }
 };
