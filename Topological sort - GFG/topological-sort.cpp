@@ -5,41 +5,40 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    void findTopoSort(int node,vector<int> &vis, stack<int> &st, vector<int> adj[])
-    {
-        vis[node] = 1;
-        
-        for(auto it: adj[node])
-        {
-            if(!vis[it])
-            {
-                findTopoSort(it,vis,st,adj);
-            }
-        }
-        st.push(node);
-    }
-	public:
+
+	void findtopoSort(int node,vector<int> &vis,stack<int> &st,vector<int> adj[])
+	{
+	    vis[node] = 1;
+	    for(auto it: adj[node])
+	    {
+	        if(vis[it] == 0)
+	        {
+	            findtopoSort(it,vis,st,adj);
+	        }
+	    }
+	    st.push(node);
+	}
+		public:
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
-	    stack<int> st;
 	    vector<int> vis(V,0);
-	    
+	    stack<int> st;
 	    for(int i=0; i<V; i++)
 	    {
-	        if(!vis[i])
+	        if(vis[i] == 0)
 	        {
-	            findTopoSort(i,vis,st,adj);
+	            findtopoSort(i,vis,st,adj);
 	        }
 	    }
-	    vector<int> topo;
+	    vector<int> ans;
 	    while(!st.empty())
 	    {
-	        topo.push_back(st.top());
+	        ans.push_back(st.top());
 	        st.pop();
 	    }
-	    return topo;
+	    return ans;
 	}
 };
 
