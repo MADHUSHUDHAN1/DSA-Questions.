@@ -7,9 +7,8 @@ class Solution {
 public:
 	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
 	    // Code here
-	    //using khan's algo
-	    queue<int>q;
 	    int n = prerequisites.size();
+	    queue<int> q;
 	    vector<vector<int>> adj(N);
 	    for(int i=0; i<n; i++)
 	    {
@@ -23,11 +22,11 @@ public:
 	            indegree[it]++;
 	        }
 	    }
+	    
 	    for(int i=0; i<N; i++)
 	    {
-	        if(indegree[i]== 0){
-	            q.push(i);
-	        }
+	        if(indegree[i] == 0)
+	        q.push(i);
 	    }
 	    int cnt = 0;
 	    while(!q.empty())
@@ -35,11 +34,12 @@ public:
 	        int node = q.front();
 	        q.pop();
 	        cnt++;
-	            for(auto it: adj[node]){
-	                indegree[it]--;
-	                if(indegree[it] == 0)
-	                q.push(it);
-	            }
+	        for(auto it: adj[node])
+	        {
+	            indegree[it]--;
+	            if(indegree[it] == 0)
+	            q.push(it);
+	        }
 	    }
 	    if(cnt == N)
 	    return true;
