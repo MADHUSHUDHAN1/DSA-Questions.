@@ -11,8 +11,9 @@ using namespace std;
 
 class Solution
 {
+   public:
     
-     int find(int x, int parent[])
+    int find(int x, int parent[])
     {
         if(parent[x] == x)
         {
@@ -23,11 +24,11 @@ class Solution
         
         return parent[x];
     }
-    public:
+    
     //Function to merge two nodes a and b.
-    void union_( int x, int y, int parent[], int rank1[]) 
+    void union_(int x, int y, int parent[], int rank1[]) 
     {
-        //code here
+        
         int x_rep = find(x, parent);
         
         int y_rep = find(y, parent);
@@ -51,14 +52,12 @@ class Solution
             
             rank1[x_rep]++;
         }
-        
     }
     
     //Function to check whether 2 nodes are connected or not.
-    bool isConnected(int x,int y, int par[], int rank1[])
+    bool isConnected(int x, int y, int parent[], int rank1[])
     {
-        //code here
-        return find(x,par) == find(y,par);
+        return find(x, parent) == find(y, parent);
     }
 };
 
