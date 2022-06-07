@@ -11,53 +11,43 @@ using namespace std;
 
 class Solution
 {
-   public:
-    
-    int find(int x, int parent[])
+    public:
+    int find(int x, int par[])
     {
-        if(parent[x] == x)
+        if(x == par[x])
         {
             return x;
         }
-        
-        parent[x] = find(parent[x], parent);
-        
-        return parent[x];
+        return par[x] = find(par[x],par);
     }
-    
     //Function to merge two nodes a and b.
-    void union_(int x, int y, int parent[], int rank1[]) 
+    void union_( int a, int b, int par[], int rank1[]) 
     {
+        //code here
+       int a1 = find(a,par);
+       int b1 = find(b,par);
+       if(a1 == b1)
+       return;
+       if(rank1[a1] < rank1[b1])
+       {
+           par[a1] = b1;
+       }
+       else if(rank1[b1] < rank1[a1])
+       {
+           par[b1] = a1;
+       }
+       else{
+           par[b1] = a1;
+           rank1[a1]++;
+       }
         
-        int x_rep = find(x, parent);
-        
-        int y_rep = find(y, parent);
-        
-        if(x_rep == y_rep)
-        {
-            return;
-        }
-        
-        if(rank1[x_rep] < rank1[y_rep])
-        {
-            parent[x_rep] = y_rep;
-        }
-        else if(rank1[x_rep] > rank1[y_rep])
-        {
-            parent[y_rep] = x_rep;
-        }
-        else
-        {
-            parent[y_rep] = x_rep;
-            
-            rank1[x_rep]++;
-        }
     }
     
     //Function to check whether 2 nodes are connected or not.
-    bool isConnected(int x, int y, int parent[], int rank1[])
+    bool isConnected(int x,int y, int par[], int rank1[])
     {
-        return find(x, parent) == find(y, parent);
+        //code here
+        return find(x,par) == find(y,par);
     }
 };
 
