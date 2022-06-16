@@ -3,30 +3,18 @@ public:
     vector<int> rearrangeArray(vector<int>& nums) {
        
         int n = nums.size();
-        vector<int> pos;
-        vector<int> nev;
+       vector<int> ans(n,0);
+        int pos = 0, nev =1;
         for(int i=0; i<n; i++)
         {
-            if(nums[i]>0)
-            {
-                pos.push_back(nums[i]);
-            }
+           if(nums[i]>0)
+           {
+               ans[pos] = nums[i];
+               pos += 2;
+           }
             else{
-                nev.push_back(nums[i]);
-            }
-        }
-        vector<int> ans;
-        int j=0,k=0;
-        for(int i=0; i<n; i++)
-        {
-            if(i%2==0)
-            {
-                ans.push_back(pos[j]);
-                j++;
-            }
-            else{
-                ans.push_back(nev[k]);
-                k++;
+                ans[nev] = nums[i];
+                nev += 2;
             }
         }
         return ans;
