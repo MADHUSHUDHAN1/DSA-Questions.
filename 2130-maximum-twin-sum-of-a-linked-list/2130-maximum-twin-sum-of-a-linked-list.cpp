@@ -10,22 +10,42 @@
  */
 class Solution {
 public:
+   void reverse(ListNode** head){
+        ListNode* curr=*head,*prev=0,*nxt;
+        while(curr){
+		     nxt=curr->next;
+			 curr->next=prev;
+			 prev=curr;
+			 curr=nxt;
+		}	 
+        *head=prev;  
+    }
+    
     int pairSum(ListNode* head) {
-        vector<int> ans;
         
-        while(head != NULL)
-        {
-            ans.push_back(head->val);
-            head = head->next;
+        ListNode* prev=0, *slow=head, *fast=head;
+        while(fast and fast->next){
+	       prev=slow;
+		   slow=slow->next;
+		   fast=fast->next->next;
         }
-        int maxSum = INT_MIN;
-        int n = ans.size();
-        for(int i=0; i<n/2; i++)
-        {
-            int sum = ans[i] + ans[n-1-i];
-            maxSum = max(maxSum,sum);
+        prev->next=0;      //seperate them
+        reverse(&slow);
+   
+        //get the max sum of twins
+        int sum=0;
+        ListNode *ptr1=head, *ptr2=slow;
+    
+	    while(ptr1){
+	      sum=max(sum, ptr1->val+ptr2->val );
+		  ptr1=ptr1->next ;
+		  ptr2=ptr2->next;
         }
-        return maxSum;
-        
+ 
+        //restore linked list back again
+        reverse(&slow);   
+	    prev->next=slow; 
+   
+        return sum;
     }
 };
