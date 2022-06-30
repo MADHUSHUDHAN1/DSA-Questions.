@@ -1,23 +1,33 @@
 class Solution {
 public:
+    int f(int ind,vector<int> &nums,vector<int> &dp)
+{
+    if(ind == 0)
+    {
+        return nums[0];
+    }
+    if(ind < 0)
+    {
+        return 0;
+    }
+    if(dp[ind] !=-1)
+    {
+        return dp[ind];
+    }
+    int pick = nums[ind] + f(ind-2,nums,dp);
+    int notPick = 0 +f(ind-1,nums,dp);
+    return dp[ind] = max(pick,notPick);
+}
+    
+    
     int deleteAndEarn(vector<int>& nums) {
         int n = 10001;
-        vector<int> values(n,0);
-        
-        for(auto num: nums)
+        vector<int> nums1(n,0);
+        for(auto it: nums)
         {
-            values[num] += num;
+            nums1[it] += it;
         }
-        
-        int take =0, skip=0;
-        for(int i=0; i<n; i++)
-        {
-            int takei = skip + values[i];
-            int skipi = max(take,skip);
-            
-            take = takei;
-            skip = skipi;
-        }
-        return max(take,skip);
+        vector<int> dp(n,-1);
+        return f(n-1,nums1,dp);
     }
 };
