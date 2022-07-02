@@ -1,15 +1,23 @@
 class Solution {
 public:
-    int rob1(vector<int> nums,vector<int>& dp,int i)
+    int f(int ind,vector<int> &nums, vector<int> &dp)
     {
-        if(i>= nums.size())
+        if(ind == 0)
+            return nums[0];
+        if(ind < 0)
+        {
             return 0;
-        if(dp[i] != -1)
-            return dp[i];
-        return dp[i] = max(rob1(nums,dp,i+1),nums[i]+rob1(nums,dp,i+2));
+        }
+        if(dp[ind] != -1)
+            return dp[ind];
+        
+        int take = nums[ind] + f(ind-2,nums,dp);
+        int notTake = 0+f(ind-1,nums,dp);
+        return dp[ind] = max(take,notTake);
     }
     int rob(vector<int>& nums) {
-        vector<int> dp(nums.size(),-1);
-        return rob1(nums,dp,0);
+        int n = nums.size();
+        vector<int> dp(n,-1);
+        return f(n-1,nums,dp);
     }
 };
