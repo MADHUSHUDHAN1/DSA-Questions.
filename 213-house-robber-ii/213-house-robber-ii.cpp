@@ -3,17 +3,21 @@ public:
     int f(vector<int> & temp)
     {
         int n = temp.size();
-        vector<int> dp(n,-1);
-        dp[0] = temp[0];
+       // vector<int> dp(n,-1);
+       // dp[0] = temp[0];
+        int prev = temp[0];
+        int prev2 = 0;
         for(int i=1; i<n; i++)
         {
             int take = temp[i];
             if(i>1)
-                take += dp[i-2];
-            int notTake = 0 + dp[i-1];
-            dp[i] = max(take,notTake);
+                take += prev2;
+            int notTake = 0 + prev;
+            int curri = max(take,notTake);
+            prev2 = prev;
+            prev = curri;
         }
-        return dp[n-1];
+        return prev;
     }
     int rob(vector<int>& nums) {
         int n = nums.size();
