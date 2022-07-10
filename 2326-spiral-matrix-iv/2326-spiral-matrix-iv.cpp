@@ -68,7 +68,7 @@ public:
             }
             
          n--; 
-            m--;
+            m++;
         }
         return spiral;
     }
