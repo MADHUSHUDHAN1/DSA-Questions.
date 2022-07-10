@@ -67,8 +67,7 @@ public:
                 j++;
             }
             
-         n--; 
-            m++;
+       
         }
         return spiral;
     }
