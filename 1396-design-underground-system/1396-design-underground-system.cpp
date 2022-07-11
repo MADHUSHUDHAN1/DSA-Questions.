@@ -12,7 +12,7 @@ public:
     
     void checkOut(int id, string stationName, int t) {
         auto checkIn = checkInMap[id];
-        //checkInMap[id].erase();
+        checkInMap.erase(id);
         
         string checkInStation = checkIn.first+"_"+stationName;
         routMap[checkInStation].first += t-checkIn.second;
