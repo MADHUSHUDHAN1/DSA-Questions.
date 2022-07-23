@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        unordered_map<char,int> mp1,mp2;
+        unordered_map<char,int> mp1;
         int ans =0;
         for(int i=0; i<s.size(); i++)
         {
@@ -9,22 +9,11 @@ public:
         }
         for(int i=0; i<t.size(); i++)
         {
-            mp2[t[i]]++;
+            mp1[t[i]]--;
         }
-        for(auto& it : mp1)
+        for(auto it:mp1)
         {
-            if(mp2.find(it.first) != mp2.end())
-            {
-               ans += abs(it.second - mp2[it.first]) ;
-                   mp2[it.first] = 0;
-            }
-            else{
-                ans += it.second;
-            }
-        }
-        for(auto it : mp2)
-        {
-            ans += it.second;
+            ans += abs(it.second);
         }
         return ans;
     }
