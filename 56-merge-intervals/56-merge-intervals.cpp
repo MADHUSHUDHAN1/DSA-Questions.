@@ -1,26 +1,24 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int> > ans;
+        vector<vector<int>> ans;
         sort(intervals.begin(),intervals.end());
-        int minL = intervals[0][0];
-        int maxL = intervals[0][1];
-        
+            int minele=intervals[0][0];
+            int maxele = intervals[0][1];
         for(int i=1; i<intervals.size(); i++)
         {
-            if(maxL >= intervals[i][0])
+            if(maxele >= intervals[i][0])
             {
-                maxL = max(maxL,intervals[i][1]);
-                minL = min(minL,intervals[i][0]);
+                 minele = min(intervals[i][0],minele);
+                maxele = max(maxele,intervals[i][1]);
             }
             else{
-                ans.push_back({minL,maxL});
-                minL = intervals[i][0];
-                maxL = intervals[i][1];
-                
+                ans.push_back({minele,maxele});
+                minele =intervals[i][0];
+                maxele = intervals[i][1];
             }
         }
-        ans.push_back({minL,maxL});
+        ans.push_back({minele,maxele});
         return ans;
     }
 };
