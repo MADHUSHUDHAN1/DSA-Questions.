@@ -11,11 +11,12 @@ public:
             }
             else{
                 swap(nums1[i],nums2[j]);
+                sort(nums2.begin(),nums2.end());
                 i++;
-                sort(nums2.begin(), nums2.end());
             }
         }
-        while(j<n)
+        
+        while(i<m+n && n>0)
         {
             nums1[i++] = nums2[j++];
         }
