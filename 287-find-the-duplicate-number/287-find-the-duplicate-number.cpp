@@ -1,27 +1,27 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        vector<int> cnt(nums.size(),0);
-        int ind =  0;
-		
-		// store the cnt of each value in the cnt vector
-        for(int i = 0; i<nums.size(); i++)
-        {
-            cnt[nums[i]]++;
-        }
         
-        for(int i = 0; i<cnt.size(); i++)
+        int n=nums.size();
+        int low = 1;
+        int high = n-1;
+        while(low<high)
         {
-			// if cnt[i] > 1
-			// this means that element occur more than once in nums
-			// we have to return i
-            if(cnt[i] > 1)
+            int mid = (low+high)/2;
+            int count = 0;
+            for(int num : nums)
             {
-                ind  = i;
-                break;
+                if(num<=mid)
+                    count++;
+            }
+            if(count>mid)
+            {
+                high = mid;
+            }
+            else{
+                low = mid+1;
             }
         }
-        
-        return ind; 
+        return low;
     }
 };
