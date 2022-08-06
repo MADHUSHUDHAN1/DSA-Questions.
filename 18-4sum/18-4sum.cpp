@@ -6,7 +6,7 @@ public:
         
         vector<vector<int> > answer;
         
-        if(n<4) return answer;
+       // if(n<4) return answer;
         
         sort(nums.begin(),nums.end());
         
