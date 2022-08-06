@@ -1,88 +1,61 @@
 class Solution {
 public:
-     vector<vector<int> > fourSum(vector<int> &nums, int target) {
+     vector<vector<int> > fourSum(vector<int> &num, int target) {
     
-           int n = nums.size();
+        vector<vector<int> > res;
+    
+        if (num.empty())
+            return res;
+    
+        std::sort(num.begin(),num.end());
+    
+        for (int i = 0; i < num.size(); i++) {
         
-        vector<vector<int> > answer;
+            long long int target_3 = target - num[i];
         
-       // if(n<4) return answer;
-        
-        sort(nums.begin(),nums.end());
-        
-        for(int i=0;i<n;){
-            for(int j=i+1;j<n;){
-                
-                int left = j+1;
-                int right = n-1;
-        
-                long long int x = (long long int)target - (long long int)nums[i] - (long long int)nums[j];
-                
-                while(left<right){
-                    
-                    if(x == nums[left]+nums[right]){
-                    vector<int> vect{nums[i] , nums[j] , nums[left] , nums[right]};
-                    answer.push_back(vect);
-                    
-                    //skipping duplicates while moving right
-                    int k = 1;
-                    while((left+k)<n && nums[left+k]==nums[left]) ++k;
-                    
-                    if((left+k)>=n) break;
-                    else left = left+k;
-                    
-                    //skipping duplicates while moving left
-                    k = 1;
-                    while((right-k)>=0 && nums[right-k]==nums[right]) ++k;
-                    
-                    if((right-k)<0) break;
-                    else right = right-k;
-                        
-                }
-                else{
-                    
-                    if(x>nums[left]+nums[right]){
-                        
-                        //skipping duplicates while moving right
-                        int k = 1;
-                        while((left+k)<n && nums[left+k]==nums[left]) ++k;
-                    
-                        if((left+k)>=n) break;
-                        else left = left+k;
-                        
-                    }
-                    else{
-                        
-                        //skipping duplicates while moving left
-                        int k = 1;
-                        while((right-k)>=0 && nums[right-k]==nums[right]) ++k;
-                    
-                        if((right-k)<0) break;
-                        else right = right-k;
-                        
-                    }
-                    
-                }  
-                    
-                }
-                
-               //skipping duplicates while moving right
-               int k = 1;
-                while((j+k)<n && nums[j+k]==nums[j]) ++k;
-                    
-                if((j+k)>=n) break;
-                else j = j+k;   
-                    
-            }
+            for (int j = i + 1; j < num.size(); j++) {
             
-            //skipping duplicates while moving right
-            int k = 1;
-            while((i+k)<n && nums[i+k]==nums[i]) ++k;
+                 long long int target_2 = target_3 - num[j];
+            
+                int front = j + 1;
+                int back = num.size() - 1;
+            
+                while(front < back) {
+                
+                    long long int two_sum = num[front] + num[back];
+                
+                    if (two_sum < target_2) front++;
+                
+                    else if (two_sum > target_2) back--;
+                
+                    else {
                     
-            if((i+k)>=n) break;
-            else i = i+k; 
-        }
+                        vector<int> quadruplet(4, 0);
+                        quadruplet[0] = num[i];
+                        quadruplet[1] = num[j];
+                        quadruplet[2] = num[front];
+                        quadruplet[3] = num[back];
+                        res.push_back(quadruplet);
+                    
+                        // Processing the duplicates of number 3
+                        while (front < back && num[front] == quadruplet[2]) ++front;
+                    
+                        // Processing the duplicates of number 4
+                        while (front < back && num[back] == quadruplet[3]) --back;
+                
+                    }
+                }
+                
+                // Processing the duplicates of number 2
+                while(j + 1 < num.size() && num[j + 1] == num[j]) ++j;
+            }
         
-        return answer;
+            // Processing the duplicates of number 1
+            while (i + 1 < num.size() && num[i + 1] == num[i]) ++i;
+        
+        }
+    
+        return res;
+    
     }
 };
