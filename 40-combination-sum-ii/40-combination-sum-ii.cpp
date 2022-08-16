@@ -1,16 +1,16 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    bool solve(int ind,vector<int> &candidates, int target, vector<int> res)
+    void solve(int ind,vector<int> &candidates, int target, vector<int> res)
     {
         if(target == 0)
         {
             ans.push_back(res);
-            return true;
+            return ;
         }
         if(ind <0)
         {
-            return false;
+            return ;
         }
         
         if(target-candidates[ind] >= 0)
@@ -25,7 +25,7 @@ public:
         }
         solve(ind-1,candidates,target,res);
         
-        return false;
+        //return false;
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         sort(candidates.begin(),candidates.end());
