@@ -1,25 +1,30 @@
 class Solution {
 public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> res;
-        permuteRecursive(nums,0,res);
-        return res;
-    }
-    
-    void permuteRecursive(vector<int> nums,int i,vector<vector<int>>& res)
+    void solve(vector<int> path, vector<int> &nums,vector<vector<int>> &ans,vector<int> & freq)
     {
-        if(i >= nums.size())
+        if(path.size() == nums.size())
         {
-            res.push_back(nums);
+            ans.push_back(path);
+            return;
         }
-        else {
-            for(int j=i; j<nums.size(); j++)
+        
+        for(int i=0; i<nums.size(); i++)
+        {
+            if(freq[i] == 0)
             {
-                swap(nums[i],nums[j]);
-                permuteRecursive(nums,i+1,res);
-                swap(nums[i],nums[j]);
+                path.push_back(nums[i]);
+                freq[i] = 1;
+                solve(path,nums,ans,freq);
+                freq[i] = 0;
+                path.pop_back();
             }
         }
     }
-    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> path;
+        vector<int> freq(nums.size(),0);
+        solve(path,nums,ans,freq);
+        return ans;
+    }
 };
