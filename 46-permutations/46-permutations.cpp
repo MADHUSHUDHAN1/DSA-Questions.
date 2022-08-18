@@ -1,30 +1,30 @@
 class Solution {
 public:
-    void solve(vector<int> path, vector<int> &nums,vector<vector<int>> &ans,vector<int> & freq)
+    vector<vector<int>> res;
+    void solve(vector<int> &nums,vector<int> &visited, vector<int> ans)
     {
-        if(path.size() == nums.size())
+        if(nums.size() == ans.size())
         {
-            ans.push_back(path);
+            res.push_back(ans);
             return;
         }
         
         for(int i=0; i<nums.size(); i++)
         {
-            if(freq[i] == 0)
+            if(visited[i] == 0)
             {
-                path.push_back(nums[i]);
-                freq[i] = 1;
-                solve(path,nums,ans,freq);
-                freq[i] = 0;
-                path.pop_back();
+                ans.push_back(nums[i]);
+                visited[i] = 1;
+                solve(nums,visited,ans);
+                ans.pop_back();
+                visited[i] = 0;
             }
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> path;
-        vector<int> freq(nums.size(),0);
-        solve(path,nums,ans,freq);
-        return ans;
+        vector<int> visited(nums.size(),0);
+        vector<int> ans;
+        solve(nums,visited,ans);
+        return res;
     }
 };
