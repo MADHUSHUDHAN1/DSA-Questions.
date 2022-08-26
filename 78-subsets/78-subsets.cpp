@@ -1,25 +1,24 @@
 class Solution {
-    private:
-    void solve(vector<int> nums,vector<int> res,int index,vector<vector<int>>& ans)
+public:
+    void solve(vector<int> &nums,int ind, vector<int> ans, vector<vector<int>> &res)
     {
-        if(index >= nums.size())
+        if(ind == nums.size())
         {
-            ans.push_back(res);
+            res.push_back(ans);
             return;
         }
         
-        solve(nums,res,index+1,ans);
-        
-        int ele= nums[index];
-        res.push_back(ele);
-        solve(nums,res,index+1,ans);
+        ans.push_back(nums[ind]);
+        solve(nums,ind+1,ans,res);
+        ans.pop_back();
+        solve(nums,ind+1,ans,res);
     }
-public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> res;
-        int index=0;
-        solve(nums,res,index,ans);
-        return ans;
+        
+        int n = nums.size();
+        vector<int> ans;
+        vector<vector<int>> res;
+        solve(nums,0,ans,res);
+        return res;
     }
 };
